@@ -1,0 +1,126 @@
+{
+    "active": 
+    {
+        "masses" :
+        {
+        },
+        "features":
+        {
+        },
+        "edges":
+        {
+            "y_edges_diff": {
+                "values":[],
+                "color": [0,255,0]},
+            "t_edges_diff": {
+                "values":[],
+                "color": [0,255,0]}
+       },
+       "groups":
+       {
+            "y_groups_diff":
+            {
+                "values":[],
+                "color": [0,255,0]
+            },
+            "x_groups_diff":
+            {
+                "values":[],
+                "color": [0,0,255]
+            },
+            "y_groups_raw_diff":
+            {
+                "values":[],
+                "color": [0,255,0]
+            },
+            "x_groups_raw_diff":
+            {
+                "values":[],
+                "color": [0,0,255]
+            },
+            "y_min_inverse_groups_diff":
+            {
+                "values":[],
+                "color": [255,0,255]
+            }
+       },
+        "axes":{}
+    },
+    "inactive":
+    {
+        "masses" :
+        {
+            "combo_diff": 
+            {
+                "color": [0,255,0],
+                "y_superior":0,
+                "y_inferior":1,
+                "x_lateral":1,
+                "x_medial":0
+            },
+            "difference_based0": 
+            {
+                "color": [0,255,0],
+                "y_superior":0,
+                "y_inferior":1,
+                "x_lateral":1,
+                "x_medial":0
+            },
+            "difference_based1": 
+            {
+                "color": [0,255,0],
+                "y_superior":0,
+                "y_inferior":1,
+                "x_lateral":1,
+                "x_medial":0
+            },
+            "brightness_based":
+            {
+                "color": [0,255,0],
+                "y_superior":0,
+                "y_inferior":1,
+                "x_lateral":1,
+                "x_medial":0
+            },
+            "inverse_mass": 
+            {
+                "color": [0,255,0],
+                "y_superior":0,
+                "y_inferior":1,
+                "x_lateral":1,
+                "x_medial":0
+            },            
+            "y_x_masses_diff": 
+            {
+                "color": [0,0,255],
+                "y_superior":0,
+                "y_inferior":1,
+                "x_lateral":1,
+                "x_medial":0
+            },
+            "y_masses_diff": 
+            {
+                "color": [0,255,0],
+                "y_superior":0,
+                "y_inferior":1,
+                "x_lateral":1,
+                "x_medial":0
+            }
+        },
+        "features":
+        {
+            "head": {},
+            "extraction_hole": {},
+            "body": {}
+        },
+        "edges":{
+            "edges_bright": {},
+            "gradient_sobel":{},
+            "gradient_roberts":{},
+            "gradient_preweitt":{},
+            "laplacian and laplacian with diagonals":{}
+        },
+        "axes":{}
+        
+    }
+}
