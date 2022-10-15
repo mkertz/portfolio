@@ -7,15 +7,11 @@ import pickle
 
 def main():
     '''
-    This program is designed to determine the money spent by Medicare Part D on drugs that are on the Beers list.
-    Medicare Part D is a government sponsored insurance program that covers drugs that are self administered by elderly populations
-    Beer's list drugs are drugs which are not recommended for elderly populations
-    This Program that sorts through a list of medicare covered drugs to see if they match with Beer's list.
-    It then approximates the costs spent on drugs on Beers list.
-    The purpose is to approximate spending that might be saved through decreased prescribing of beers drugs.
-
-    The savings from eliminating Beer's list drugs isn't 100% translatable as these drugs can be indicated in
-    certain uncommon circumstances
+    This program determines Medicare Part D spending on Beer’s list medications. 
+    Medicare Part D is a government sponsored insurance program that covers self-administered medications within elderly populations. 
+    Beer's list medications have an elevated potential for adverse effects within elderly populations. 
+    This program sorts out Beer’s list medications from the CMS spending and utilization data for Medicare Part D. 
+    This also allows for further analysis on the Beer’s list medication data.
     
     '''
 
