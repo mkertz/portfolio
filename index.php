@@ -2,9 +2,7 @@
 
 session_start();
 $errorMsg = $_SESSION['errorMsg'];
-$_SESSION['errorMsg'] = ''; //remove message, so error doesn't show up in subsequent successful activations
-
-//$_SESSION['checkMsg'] = 'checkMsg';
+$_SESSION['errorMsg'] = ''; 
 
 $log = fopen('logs.txt', 'a') or die('Unable to open file!'); //consider better documentation of log
 fwrite($log, 'inside index error message $errorMsg\n');
@@ -222,7 +220,8 @@ for (let field of Array.from(fields)) {//need to filter out upload button, could
     });
   }
   /*
-  The code below was written to address an asyn issue I had been having
+  The code below was written to address an async issue I had been having
+  preserved here in case I decide to work with it again
 
   //load with select options - show only certain highlighted features
   //load correct, marked image immediately after upload, use async for this
