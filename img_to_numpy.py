@@ -1,21 +1,25 @@
 """
-image_to_matrix.py converts an image (jpg and png) to a pickled matrix to reduce load time during coding
-"""
-from PIL import Image, ImageDraw
+image_to_matrix.py converts an image (jpg, png, etc...) to an array
+was created for speedier error proofing so the same image isn't repeatedly converted to numpy arrays
+could combine with analyze_array.py for site analysis
+
+previously used/error testing imports
+import ImageDraw
 import simpleimage
+import os
+
+"""
+from PIL import Image
 import numpy as np
 from numpy import asarray
 import sys
 import logging
-import os
 
 def main_exec(logger):
 
     #from shell_exec(shell_exec($imgToNumpy .' '. $uploadedPic.' '.$directoryPath))
     uploadedPic = sys.argv[1] #this is the pic name
     dirPath = sys.argv[2] # previously was 'ImageArray'
-    
-    #file_destination = '../uploads/2022:05:18:04:55:42_62847c4ee51108.19420209/uploadedPic'
     
     img = Image.open(uploadedPic)
     img_arr = asarray(img) #could put error proof here (try/except) in case image can't be converted to array/is only an image by extension
