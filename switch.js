@@ -1,3 +1,88 @@
+//switchOnOff and varExchange are the two programs used for the analysis
+//the other programs were previously used, many were created to address an async related issue that had been present
+
+  function switchOnOff(elem){
+    //functions to indicate whether or not an analysis feature is activated or deactivated
+    return new Promise(function (resolve, reject) {//(resolve, reject) 
+      
+    //document.getElementById('switchOnOffTime').innerHTML = "switchOnOff() start " + new Date().getTime();
+  
+    //document.getElementById('prosthInterface').style.cursor = "wait";
+    let layer = elem.getAttribute('layer');
+    var filled = sessionStorage.getItem('selectionsLayerFilled_'+layer);//refine variable to match layer that is present
+    let noSelectionNum = sessionStorage.getItem('noSelectionNum');
+  
+    if (elem.value.endsWith('Off')){ //switch will be turned on, endsWith doesn't work with internet explorer
+      elem.value = elem.value.slice(0,-3) + 'On'; //used instead of replace as On or Off may be elsewhere in value
+      elem.setAttribute("status", "active");
+      elem.style.color="black";
+      filled = parseInt(filled)+parseInt(1); 
+      //change items here as well
+      if(filled == 1){ //make sure this results in appropriate warning
+        noSelectionNum = parseInt(noSelectionNum) + parseInt(1);
+      }
+    }  
+    else { //switch is in 'On', and will be turned off below
+      elem.value = elem.value.slice(0,-2) + 'Off'; 
+      elem.setAttribute("status", "inactive");
+      elem.style.color="grey";    
+      filled = parseInt(filled)-parseInt(1);
+      if(filled == 0){ //no selectionNum negative or zero means it doesn't work
+        noSelectionNum = parseInt(noSelectionNum) - parseInt(1); //remove overhead/upload warning
+      }
+    }
+    
+      
+  function varExchange(elem){
+    //sends activated/deactivated analysis status from client side to varExchange.php, where they will act server-side
+    return new Promise(function (resolve, reject) {
+    //document.getElementById('varExchangeTime').innerHTML = 'varExchange Start '+new Date().getTime();  
+    
+    var xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {document.getElementById("checkvarExchange").innerHTML = this.responseText;}
+  
+    var item = elem.getAttribute('item');
+    var itemType = elem.getAttribute('itemType');
+    var status = elem.getAttribute('status');
+    
+    var url="../picAnalysis/varExchange.php";
+    url +="?"
+    url+="item="+item;
+    url+="&itemType="+itemType;
+    url+="&status="+status;
+    
+    xhttp.open("GET", url, false); //should this be false for synchronous? If clicked in rapid succession could create problems updating json file
+    
+    xhttp.send();
+  
+    //document.getElementById('varExchangeTimeEnd').innerHTML = 'varExchange End   '+new Date().getTime();  
+      
+    if (url) {
+        resolve("Stuff worked!");
+      } else {
+        reject(Error("It broke"));
+      }
+    });
+  }
+  
+  
+    
+    //document.getElementById('switchOnOffTimeEnd').innerHTML = "switchOnOff() end   " + new Date().getTime();
+    if ('true') {
+      resolve("Stuff worked!");
+    } else {
+      reject(Error("It broke"));
+    }
+    });
+  
+    /*
+    resolve("Stuff worked!");
+    });*/
+  }
+  
+
+
+
 function startProcessing(elem){
   
     return new Promise(function (resolve, reject) {
@@ -101,52 +186,8 @@ function startProcessing(elem){
       }, "2000");
     }
   
-  function switchOnOff(elem){
-    return new Promise(function (resolve, reject) {//(resolve, reject) 
-      
-    //document.getElementById('switchOnOffTime').innerHTML = "switchOnOff() start " + new Date().getTime();
   
-    //document.getElementById('prosthInterface').style.cursor = "wait";
-    let layer = elem.getAttribute('layer');
-    var filled = sessionStorage.getItem('selectionsLayerFilled_'+layer);//refine variable to match layer that is present
-    let noSelectionNum = sessionStorage.getItem('noSelectionNum');
-  
-    if (elem.value.endsWith('Off')){ //switch will be turned on, endsWith doesn't work with internet explorer
-      elem.value = elem.value.slice(0,-3) + 'On'; //used instead of replace as On or Off may be elsewhere in value
-      elem.setAttribute("status", "active");
-      elem.style.color="black";
-      filled = parseInt(filled)+parseInt(1); 
-      //change items here as well
-      if(filled == 1){ //make sure this results in appropriate warning
-        noSelectionNum = parseInt(noSelectionNum) + parseInt(1);
-      }
-    }  
-    else { //switch is in 'On', and will be turned off below
-      elem.value = elem.value.slice(0,-2) + 'Off'; 
-      elem.setAttribute("status", "inactive");
-      elem.style.color="grey";    
-      filled = parseInt(filled)-parseInt(1);
-      if(filled == 0){ //no selectionNum negative or zero means it doesn't work
-        noSelectionNum = parseInt(noSelectionNum) - parseInt(1); //remove overhead/upload warning
-      }
-    }
-    
-    
-    //document.getElementById('switchOnOffTimeEnd').innerHTML = "switchOnOff() end   " + new Date().getTime();
-    if ('true') {
-      resolve("Stuff worked!");
-    } else {
-      reject(Error("It broke"));
-    }
-    });
-  
-    /*
-    resolve("Stuff worked!");
-    });*/
-  }
-  
-  
-  //below is for previous a version with a non-interactive display
+  //below is for previous a version with a non-interactive display, and limited options
   function giveIncompleteNotice(elem){
     let layer = elem.getAttribute('layer');
     filled = sessionStorage.getItem('selectionsLayerFilled_'+ layer);
@@ -190,43 +231,11 @@ function startProcessing(elem){
   }
   
   
-  function OLdvarExchange(elem) {
+  function OldVarExchange(elem) {
     //this function creates a timeOut to allow time for the cursor to change before delaying the execution
     return new Promise(function (resolve, reject) {
       //setTimeout(VarExchangeBody, 5);
       if (url) {
-        resolve("Stuff worked!");
-      } else {
-        reject(Error("It broke"));
-      }
-    });
-  }
-  
-  
-  function varExchange(elem){
-    return new Promise(function (resolve, reject) {
-    //document.getElementById('varExchangeTime').innerHTML = 'varExchange Start '+new Date().getTime();  
-    
-    var xhttp = new XMLHttpRequest();
-    xhttp.onload = function() {document.getElementById("checkvarExchange").innerHTML = this.responseText;}
-  
-    var item = elem.getAttribute('item');
-    var itemType = elem.getAttribute('itemType');
-    var status = elem.getAttribute('status');
-    
-    var url="../picAnalysis/varExchange.php";
-    url +="?"
-    url+="item="+item;
-    url+="&itemType="+itemType;
-    url+="&status="+status;
-    
-    xhttp.open("GET", url, false); //should this be false for synchronous? If clicked in rapid succession could create problems updating json file
-    
-    xhttp.send();
-  
-    //document.getElementById('varExchangeTimeEnd').innerHTML = 'varExchange End   '+new Date().getTime();  
-      
-    if (url) {
         resolve("Stuff worked!");
       } else {
         reject(Error("It broke"));
