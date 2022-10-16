@@ -31,6 +31,19 @@
         noSelectionNum = parseInt(noSelectionNum) - parseInt(1); //remove overhead/upload warning
       }
     }
+      
+    
+    //document.getElementById('switchOnOffTimeEnd').innerHTML = "switchOnOff() end   " + new Date().getTime();
+    if ('true') {
+      resolve("Stuff worked!");
+    } else {
+      reject(Error("It broke"));
+    }
+    });
+  
+    
+  }
+  
     
       
   function varExchange(elem){
@@ -65,20 +78,6 @@
     });
   }
   
-  
-    
-    //document.getElementById('switchOnOffTimeEnd').innerHTML = "switchOnOff() end   " + new Date().getTime();
-    if ('true') {
-      resolve("Stuff worked!");
-    } else {
-      reject(Error("It broke"));
-    }
-    });
-  
-    /*
-    resolve("Stuff worked!");
-    });*/
-  }
   
 
 
@@ -248,20 +247,5 @@ function startProcessing(elem){
   
   
   
-  
-  /*
-  function showImg(src) {
-    try{
-      var imgPath = <?php echo json_encode($_SESSION['imgPathFromHtmlDir']); ?>;
-      onload {
-              var img = document.createElement('img');
-              img.src = imgPath;
-              document.getElementById('imgDisplay').appendChild(img);
-          }
-    } 
-    catch(err){
-      //pass
-    }
-  
-  */
+
   
