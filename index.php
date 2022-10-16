@@ -2,9 +2,9 @@
 
 session_start();
 $errorMsg = $_SESSION['errorMsg'];
-
 $_SESSION['errorMsg'] = ''; //remove message, so error doesn't show up in subsequent successful activations
 
+//$_SESSION['checkMsg'] = 'checkMsg';
 
 $log = fopen('logs.txt', 'a') or die('Unable to open file!'); //consider better documentation of log
 fwrite($log, 'inside index error message $errorMsg\n');
@@ -16,11 +16,12 @@ fwrite($log, 'inside index error message $errorMsg\n');
 <html>
 
 
+
 <head>
 <script type='text/javascript' src='jsProgs/switch.js'></script>
 
 <!--
-JS scripts below used for error proofing and trying alternate functions
+ERROR PROOFING/EXPERIMENTAL SCRIPTS
 <script type='text/javascript' src='jsProgs/switch2.js'></script>
 <script type='text/javascript' src='jsProgs/scrap.js'></script>
 <script type='text/javascript' src='picAnalysis/items.json'></script>
@@ -32,31 +33,39 @@ JS scripts below used for error proofing and trying alternate functions
 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
 </head>
 
-<!--<body onload='colorSwitches()' consider deleting below>-->
-<body onload='makeSwitchesActive()'>
-<!-- consider holding color for switches in itmes json file, and loading prexisting data -->
+<!--<body onload='colorSwitches()' probably could delete below>-->
+<body onload='makeSwitchesActive();imageDisplay();'>
+<!-- could put color switches in create JSON file, loading prexisting data, using program that moves into active/deactive, not needed -->
 
 
-<div class ='header'>Med Stuff</div>
+<div class ='header'>Projects</div>
 
 <!-- Navigation Bar -->
 <div class="navbar">
   <a href="#">Prosthesis Analysis</a>
   <a href="#">Medicare Expenditure Calculations (coming soon...)</a>
-  <!--<a href="#">other</a>   for adding on additional sections later-->
+  <!--<a href="#">other</a>-->
 </div>
 
-    <div class='uploadAndEdgeAnalysis'>
+    <div class='uploadAndEdgeAnalysis' id='imgAnalysisDisplay'>
     
       <div class='uploadArea'>
-      <h2>Xray Upload </h2><!--and edge detection method... coming later-->
-        <form action='upload.php' method='post' enctype='multipart/form-data' >Select an Xray to Upload
-          <input type='button' class='pointer' name='file' id='fileLoad' value='Upload File' onclick='document.getElementById("file").click();//document.body.style.cursor="wait";'/>
-          <input type='file' style='display:none;' id='file' name='file' onchange='this.form.submit()'/> 
-          <!--<span class='edgeDetectionMethod'>Select an Edge Detection Method <input type='submit' layer=0 value ='Difference Based Detection'  status='active'  class='layer0 pointer' id='differenceBased0' name='option'></input>-->
+      <h2>Xray Upload </h2><!--and edge detection method--><br></br>
+        <form action='upload.php' method='post' enctype='multipart/form-data' ><!--Select an Xray to Upload-->
+          <input type='button' class='pointer' name='file' id='fileLoad' value='Upload Xray File' onclick='document.getElementById("file").click();'/>
+          <input type='file' style='display:none;' id='file' name='file' onchange='this.form.submit();document.getElementById("imgAnalysisDisplay").style.cursor="wait"'/> 
+          </form>
+          <!--<span class='edgeDetectionMethod'>Select an Edge Detection Method <input type='submit' layer=0 value ='Difference Based Detection'  status='active'  class='layer0 pointer' id='differenceBased0' name='option'></input>
+        //onclick='document.getElementById("imgProsthesis".submit() 
+        -->
 
-        </span>
-        </form>
+         
+         <!---->
+      
+      <form action='createDir.php' method='post' >
+        <input  type='submit' value='Use Preloaded Image' />
+      </form> 
+
 
       </div>
       
@@ -66,7 +75,7 @@ JS scripts below used for error proofing and trying alternate functions
 <div class = 'row'>
   <div class = 'side'>
     
-      
+
       <h2 title='Prosthesis edges are detected by finding large gradients between neighboring pixels'>Edge Display Options  </h2><div class='edgeOptions'>&nbsp&nbsp&nbsp&nbsp</div>
       <br></br>
       <input type='submit' class='pointer' layer=1 value ='Horizontal Edges On' title='horizontal edges are edges along the x-axis of the upright prosthesis image' status='active'  itemType='edges' item='y_edges_diff' name='option'> </input>
@@ -74,7 +83,7 @@ JS scripts below used for error proofing and trying alternate functions
       <span id='selectionsLayerID_1'></span>
       <br class='optionsSelectionDivision'></br>
 
-      <p id='check1'></p> <!--this is used for error proofing-->
+      <p id='check1'></p>
   
       
       <h2 title='Edges are distributed into groups, or segments, which contain pixels of a uniform brightness'>Group Display Options  </h2><div class='groupOptions'>&nbsp&nbsp&nbsp&nbsp</div>
@@ -107,7 +116,7 @@ JS scripts below used for error proofing and trying alternate functions
     <span id='selectionsLayerID_4'></span>
     -->
     <!--</div>-->
-    <br></br><br></br>
+    <br></br>
     <div class='possibleChanges'>
     <h2>Upcoming/Potential Changes:</h2>
     <h3>Prosthesis Analysis:</h3>
@@ -115,32 +124,34 @@ JS scripts below used for error proofing and trying alternate functions
       Program that categorizes uploaded prosthesis by feature
     </p>
     <p>
-      Create functionality for poor quality xrays and xray types
+      Improve functionality for poor quality xrays and xray types
     </p>
     <p>
       Have option of selecting edge detection approach
     </p>
     <p>
-      Reincorporate prosthesis orientation correction function (makes uploaded image upright and oriented for analysis) after making more efficient
+      Improve + reincorporate prosthesis orientation correction function (makes uploaded image upright and oriented for analysis)
     </p>
     <h3>Prosthesis Display:</h3>
+    <p> 
+        Consistent and current image display, responsive display during loading, consistent image display after refresh
+    </p>
     <p> 
         Program to increase efficiency of image creation
     </p>
     <p> 
         Multiple color gradations or color selection for greater clarity
     </p>
+
+    <h3>General Improvements:</h3>
     <p> 
-        Interrupt process of image creation to recreate image if changes are made to image options
-    </p>
-    <p> 
-        Explanations for image processing groupings
+        Bug Fixes, error display for user, smooth sequential functioning using onclick()
     </p>
 </div>
   
   </div>
   
-      <img id= 'imgProsthesis' class=prosthImage src="sample.jpeg"></img>
+      <img id= 'imgProsthesis' class=prosthImage src="sample.jpeg" onerror="this.onerror=null; this.src='sample.jpeg'"></img>
       <div class='imgBackground'></div>
    
    </div>
@@ -153,15 +164,17 @@ JS scripts below used for error proofing and trying alternate functions
 </div>
 
 
+
 </body>
 <div class = "footer">
-  Footer
+  updated 10/2022
 </div>
 
 
 
 
 <script> 
+/*document.getElementById("prosthInterface").style.cursor = "wait";//may use related line of code again*/
 
 function imageDisplay(){
     return new Promise(function (resolve, reject){
@@ -170,7 +183,9 @@ function imageDisplay(){
     var queryString = "?t=" + timestamp;
     var imgProSource = <?php echo json_encode($_SESSION['imgPathFromHtmlDir']); ?>;
     imgProsthesis.src = imgProSource + queryString;
+    
 
+   
     if ('true') {
       resolve("worked!");
     } else {
@@ -206,9 +221,36 @@ for (let field of Array.from(fields)) {//need to filter out upload button, could
  
     });
   }
+  /*
+  The code below was written to address an asyn issue I had been having
+
+  //load with select options - show only certain highlighted features
+  //load correct, marked image immediately after upload, use async for this
+  
+  //document.onload = imageDisplay(); figure out how to show image after the image loads
+
+      //startProcessing(elem)
+      //.then(processHold())
+      //.then(
+      
+      //startProcessing();
+      //await processHoldAsync();//timed delay to allow for cursor/visual changes
+      
+  //async function cursChange(elem){setTimeout(() => {elem.style.cursor='pointer'; return 1000;}, '200'); }
+  */
+
+
 
   
   </script>
+
+
+
+    <!--
+        HTML code I may use again.
+        
+        <input type='submit' layer=0 value ='Brightness Based Off' status='active' class='layer0' id='brightnessBased0' name='option'> </input>-->
+      
 
 
 
