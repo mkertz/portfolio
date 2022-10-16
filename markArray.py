@@ -1,69 +1,35 @@
-from tkinter import TRUE
-import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
-import numpy as np
-from numpy.core.arrayprint import array_repr
-from numpy.ma.extras import average
-import math
-import pickle
-import copy
-import sys
-import pandas as pd
-import requests 
-from PIL import Image, ImageDraw
-import logging
-import json
-
 '''
+this program reads from the 'active' key in the nested dictionary items.json, where the active analysis items are stored 
+the functions display the different activated items (['item']) within the item types key ['itemType'] that are within the ['active'] key
+unique functions are used for the different item types
+
+
 TO INCLUDE:
     plt.axline, stem axis variables etc...
 
-pass pickled files, or dictionary files themsleves through python
-use entered file for list as json vs pickle?
 
-program designed to take numpy array and dictionary and display image based on parameters chosen
+previously used/unused imports
+    import math
+    import pickle
 
-dictionary in form of items pickled file
+import pandas as pd
+import requests 
 
-items['feature'['location/bounds']]
-items['feature'['color']] has corresponding color
-consider including color in activated_items
-for example:
-    items['head'['superior_bounds']] gives the y value of the superior portion of the prosthesis head
-
-activated_items = items_status['activated']
-activated_items = dictionary of activated items
-
-
-consider using classes for this
-
-
-    activated_items is a dictionary of lists of activated items
-        activated_items = {'items':['head', 'body', 'shell',... ], 'edges':['brightness_based', 'difference_based'...]
-        has lists of feature types
-        color is list [R,G,B] for color to appear on xray
-        eg. activated_items= { feature: [head, body, ...], edges: [brightness_based, subtraction, matrix], axes
-    
-    items is a dictionary with lateral, medial, superior, and inferior bounds corresponding to img_arr,
-        items includes
-            head -boundaries (rad/dia/bound?) 
-            prosthesis - boundaries
-                masses
-                borders
-            extraction cannula -boundaries
-            lower tip -point
-        axes includes
-            stem axis
-            nect axis
-        points include
-            edges
-                
-
-    check out [y][w_min], make sure these correspond with dictionary values
-
-
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 
 '''
+
+
+from tkinter import TRUE
+import numpy as np
+from numpy.core.arrayprint import array_repr
+from numpy.ma.extras import average
+import copy
+import sys
+from PIL import Image, ImageDraw
+import logging
+import json
 
 
 
