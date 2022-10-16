@@ -1,16 +1,27 @@
-from tkinter import TRUE
-import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
-import numpy as np
-from numpy.core.arrayprint import array_repr
-from numpy.ma.extras import average
-import math
-import pickle
-import copy
+'''
+program acts as a switch to turn on and off displayed features, which are contained in nested dictionary items.json
+-activated analysis moved to the ['active'] key (turned 'on')
+-deactivated analysis moved to the ['inactive'] key (turned 'off')
+
+
+accessory modules and previously used/error proofing modules
+
+    import math
+    import pickle
+    import copy
+    import pandas as pd
+    import requests 
+    from PIL import Image, ImageDraw
+    import matplotlib.pyplot as plt
+    import matplotlib.image as mpimg
+    from tkinter import TRUE
+    import numpy as np
+    from numpy.core.arrayprint import array_repr
+    from numpy.ma.extras import average
+'''
+
+
 import sys
-import pandas as pd
-import requests 
-from PIL import Image, ImageDraw
 import logging
 import json
 
