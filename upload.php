@@ -1,9 +1,6 @@
 <?php
 
-/*
-If there is an existing directory path, write over? or make a new path? delete old path specifically?
-*/
-
+//upload php handles the upload, ensures upload has the correct variables, and creates a unique directory for the upload
 
 session_start(); //creates a session for passing variables to python program
 
