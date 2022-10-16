@@ -4,24 +4,30 @@ program has two purposes that do not run togethers:
    1. to create data sets associated with implant
    2. to evaluate an image of the implant and match the implant to the created data set
 these both rely on the same array analysis, one creates the database from the arrays, the other matches it to previously created arrays
-'''
+
+
+previously used/error testing imports
 import tkinter
 from tkinter import Y
+import os
+import pandas
+import time
+import pickle
+import simpleimage #previously from simpleimage import SimpleImage
+
+
+'''
+
 from PIL import Image, ImageDraw
 from numpy.ma.extras import average
-from pylab import *
-import simpleimage #previously from simpleimage import SimpleImage
+from pylab import * #be specific?
 import numpy as np
 from numpy import asarray, int0, single, zeros
 import operator
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import math
-import os
 import sys
-import pandas
-import time
-import pickle
 import json
 import logging
 
