@@ -2,20 +2,12 @@
 
 session_start();
 $errorMsg = $_SESSION['errorMsg'];
-//echo $errorMsg;
+
 $_SESSION['errorMsg'] = ''; //remove message, so error doesn't show up in subsequent successful activations
 
-//$_SESSION['checkMsg'] = 'checkMsg';
 
 $log = fopen('logs.txt', 'a') or die('Unable to open file!'); //consider better documentation of log
 fwrite($log, 'inside index error message $errorMsg\n');
-
-/*
-ini_set("log_errors", 1);
-ini_set("error_log", "../var/www/html/indexError.log");
-error_log( "Hello, errors!" );
-*/
-
 
 
 ?>
@@ -23,30 +15,26 @@ error_log( "Hello, errors!" );
 <!DOCTYPE html>
 <html>
 
-<!--TODO: -have pre uploaded images available of prosthesis
-          -have discriptions of analysis options on dropdown or on hover
-          -have a processing logo for running analyze_array.py and mark_array.py
--->
 
 <head>
 <script type='text/javascript' src='jsProgs/switch.js'></script>
 
 <!--
-
+JS scripts below used for error proofing and trying alternate functions
 <script type='text/javascript' src='jsProgs/switch2.js'></script>
 <script type='text/javascript' src='jsProgs/scrap.js'></script>
 <script type='text/javascript' src='picAnalysis/items.json'></script>
-
 -->
+
 <link rel='stylesheet' type='text/css' href='styleSheet.css'/>
 <title>Analysis Page</title>
 <meta charset='UTF-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
 </head>
 
-<!--<body onload='colorSwitches()' probably could delete below>-->
+<!--<body onload='colorSwitches()' consider deleting below>-->
 <body onload='makeSwitchesActive()'>
-<!-- put color switches in create JSON file, loading prexisting data, using program that moves into active/deactive, not needed -->
+<!-- consider holding color for switches in itmes json file, and loading prexisting data -->
 
 
 <div class ='header'>Med Stuff</div>
@@ -55,13 +43,13 @@ error_log( "Hello, errors!" );
 <div class="navbar">
   <a href="#">Prosthesis Analysis</a>
   <a href="#">Medicare Expenditure Calculations (coming soon...)</a>
-  <!--<a href="#">other</a>-->
+  <!--<a href="#">other</a>   for adding on additional sections later-->
 </div>
 
     <div class='uploadAndEdgeAnalysis'>
     
       <div class='uploadArea'>
-      <h2>Xray Upload </h2><!--and edge detection method-->
+      <h2>Xray Upload </h2><!--and edge detection method... coming later-->
         <form action='upload.php' method='post' enctype='multipart/form-data' >Select an Xray to Upload
           <input type='button' class='pointer' name='file' id='fileLoad' value='Upload File' onclick='document.getElementById("file").click();//document.body.style.cursor="wait";'/>
           <input type='file' style='display:none;' id='file' name='file' onchange='this.form.submit()'/> 
@@ -78,12 +66,6 @@ error_log( "Hello, errors!" );
 <div class = 'row'>
   <div class = 'side'>
     
-
-
-
-  
-    <!--<div class='optionsDisplay'>-->
-    <!--<div class='imgOptions'>-->
       
       <h2 title='Prosthesis edges are detected by finding large gradients between neighboring pixels'>Edge Display Options  </h2><div class='edgeOptions'>&nbsp&nbsp&nbsp&nbsp</div>
       <br></br>
@@ -92,7 +74,7 @@ error_log( "Hello, errors!" );
       <span id='selectionsLayerID_1'></span>
       <br class='optionsSelectionDivision'></br>
 
-      <p id='check1'></p>
+      <p id='check1'></p> <!--this is used for error proofing-->
   
       
       <h2 title='Edges are distributed into groups, or segments, which contain pixels of a uniform brightness'>Group Display Options  </h2><div class='groupOptions'>&nbsp&nbsp&nbsp&nbsp</div>
@@ -170,9 +152,6 @@ error_log( "Hello, errors!" );
 
 </div>
 
-  <!--consider onload=showImg()-->
-  
-
 
 </body>
 <div class = "footer">
@@ -183,7 +162,6 @@ error_log( "Hello, errors!" );
 
 
 <script> 
-/*document.getElementById("prosthInterface").style.cursor = "wait";*/
 
 function imageDisplay(){
     return new Promise(function (resolve, reject){
@@ -191,10 +169,8 @@ function imageDisplay(){
     var timestamp = new Date().getTime();  
     var queryString = "?t=" + timestamp;
     var imgProSource = <?php echo json_encode($_SESSION['imgPathFromHtmlDir']); ?>;
-
     imgProsthesis.src = imgProSource + queryString;
 
-   
     if ('true') {
       resolve("worked!");
     } else {
@@ -230,33 +206,9 @@ for (let field of Array.from(fields)) {//need to filter out upload button, could
  
     });
   }
-  //load with select options - show only certain highlighted features
-  //load correct, marked image immediately after upload, use async for this
-  
-  //document.onload = imageDisplay(); figure out how to show image after the image loads
-
-      //startProcessing(elem)
-      //.then(processHold())
-      //.then(
-      
-      //startProcessing();
-      //await processHoldAsync();//timed delay to allow for cursor/visual changes
-      
-//async function cursChange(elem){setTimeout(() => {elem.style.cursor='pointer'; return 1000;}, '200'); }
-
-
-
 
   
   </script>
-
-
-
-<!--
-
-        
-        <input type='submit' layer=0 value ='Brightness Based Off' status='active' class='layer0' id='brightnessBased0' name='option'> </input>-->
-      
 
 
 
